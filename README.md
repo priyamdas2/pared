@@ -14,9 +14,9 @@ net, fused lasso, fused graphical lasso, and group graphical lasso. Provided R p
 R package `pared` can be directly installed from GitHub as follows.
 ```r
 # Install packages
-devtools::install_github("priyamdas2/paredBasic3", force = TRUE)
+devtools::install_github("priyamdas2/pared", force = TRUE)
 # load library
-library(paredBasic3)
+library(pared)
 ```
 ## Joint Graphical LASSO
 The function `pared_JGL()` generates an interactive 3D Pareto front plot for the Joint Graphical Lasso (JGL) using GP-based optimization. It supports both group and fused penalties. Additionally, it provides the list of Pareto-optimal values of the tuning parameters λ₁ and λ₂.
