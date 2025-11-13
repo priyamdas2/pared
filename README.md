@@ -124,7 +124,7 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
-- Below, first we highlight the code used to extract the proteomic data on *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS).
+- First we extract proteomic data corresponding to the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast pathways* for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS).
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
@@ -232,7 +232,7 @@ sample_sizes <- c(dim(OV)[1], dim(UCEC)[1], dim(UCS)[1])
 ```
 </details>
 
-- Following data extraction, we fit group JGL, and choose the optimal (λ₁, λ₂) based on AIC, and plot the estimated precision matrices for the cancers. 
+- Following data extraction, we fit the group JGL model, select the optimal (λ₁, λ₂) based on AIC, and plot the estimated precision matrices for the three cancers.
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
@@ -344,8 +344,91 @@ combined <- image_append(c(img1, img2, img3))
 print(combined)
 image_write(combined, path = "precision_heatmaps_combined.jpg", format = "jpg")
 ```
-</details>   
+</details>  
 
+- Then we explore the Pareto front of solutions using the `pared_JGL` function.
+
+```r
+start_time <- proc.time()
+result <- pared_JGL(sample_list = ALL_samples, method = "group", Pareto_budget = 50)
+end_time <- proc.time()
+CompTimeJGL <- (end_time - start_time)["elapsed"]
+result$summary_table
+result$figure
+```
+
+- From the set of candidate optimal solutions, we select (λ₁ = 0.101, λ₂ = 0.27) and visualize the precision matrices associated with the proteomic networks for these cancers.
+
+<details>
+<summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
+
+```r
+lambda_opt_pared <- c(0.101, 0.27) # from observation
+JGL_result_pared <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt_pared[1], lambda2=lambda_opt_pared[2])
+Precision_estimated_array_pared <- JGL_result_pared$theta
+
+numEdge.1.JGLgroup.pared <- (length(which(abs(Precision_estimated_array_pared[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+
+numEdge.2.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+
+numEdge.3.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+
+numSharedEdges.JGLgroup.pared <- sum(Reduce("&", lapply(Precision_estimated_array_pared, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array_pared[[1]])])  # Shared edges
+
+summaryEdges.JGLgroup.pared <- c(numEdge.1.JGLgroup.pared, numEdge.2.JGLgroup.pared, numEdge.3.JGLgroup.pared, numSharedEdges.JGLgroup.pared)
+
+
+tol <- 1e-3
+cancer_names <- c("Ovarian Cancer (pared)", 
+                  "Uterine Corpus Endometrial Carcinoma (pared)",
+                  "Uterine Carcinosarcoma (pared)")
+
+for (k in 1:3) {
+  mat <- Precision_estimated_array_pared[[k]]
+  rownames(mat) <- colnames(mat) <- proteins_here
+  
+  mat_melt <- melt(mat)
+  colnames(mat_melt) <- c("Row", "Col", "Value")
+  
+  # Reverse column order
+  mat_melt$Col <- factor(mat_melt$Col, levels = rev(proteins_here))
+  
+  mat_melt$Color <- ifelse(abs(mat_melt$Value) < tol, "Zero",
+                           ifelse(mat_melt$Value > 0, "Positive", "Negative"))
+  
+  mat_melt$Label <- ifelse(abs(mat_melt$Value) > tol,
+                           sprintf("%.2f", mat_melt$Value),
+                           "")
+  
+  plot_here <- ggplot(mat_melt, aes(x = Col, y = Row, fill = Color)) +
+    geom_tile(color = "grey90") +
+    geom_text(aes(label = Label), size = 3) + #, fontface = "bold") +
+    scale_fill_manual(values = c("Zero" = "white", "Positive" = "salmon", "Negative" = "skyblue")) +
+    scale_x_discrete(position = "top") +
+    theme_minimal(base_size = 12) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 0),
+      axis.title = element_blank(),
+      panel.grid = element_blank()
+    ) +
+    ggtitle(cancer_names[k])
+  
+  print(plot_here)
+  ggsave(filename = paste0("precision_heatmap_pared_", k, ".jpg"), plot = plot_here,
+         width = 8, height = 7, dpi = 300)
+}
+
+# Read images
+img1 <- image_read("precision_heatmap_pared_1.jpg")
+img2 <- image_read("precision_heatmap_pared_2.jpg")
+img3 <- image_read("precision_heatmap_pared_3.jpg")
+
+
+combined <- image_append(c(img1, img2, img3))
+print(combined)
+image_write(combined, path = "precision_heatmaps_pared_combined.jpg", format = "jpg")
+```
+</details>
 
 ![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
