@@ -434,7 +434,8 @@ image_write(combined, path = "precision_heatmaps_pared_combined.jpg", format = "
 ```
 </details>
 
-Corresponding to (λ₁, λ₂) = (0.101, 0.27), the estimated network obtained using JGL with a group penalty is found to be sparser than that obtained using the conventional approach of minimizing AIC. Corresponding pan-cancer proteomic networks are provided below. The reproducible code used to obtain the analysis results of this case study section is provided in the `case study` folder.
 
 ![case_study_pared_plot](images/precision_heatmaps_pared_combined.jpg)
+
+Corresponding to (λ₁, λ₂) = (0.101, 0.27), the estimated network obtained using JGL with a group penalty is found to be sparser than that obtained using the conventional approach of minimizing AIC. Corresponding pan-cancer proteomic networks are provided below. The reproducible code used to obtain the analysis results of this case study section, along with other supplementary files, is provided in the `case study` folder.
 
