@@ -137,13 +137,13 @@ lambda_opt <- c(lambda_ones[min_index[1]], lambda_twos[min_index[2]])
 JGL_result_final <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt[1], lambda2=lambda_opt[2])
 Precision_estimated_array <- JGL_result_final$theta
 
-numEdge.1.JGLgroup <- (length(which(abs(Precision_estimated_array[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+numEdge.1.JGLgroup <- (length(which(abs(Precision_estimated_array[[1]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
 
-numEdge.2.JGLgroup <- (length(which(abs(Precision_estimated_array[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+numEdge.2.JGLgroup <- (length(which(abs(Precision_estimated_array[[2]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
 
-numEdge.3.JGLgroup <- (length(which(abs(Precision_estimated_array[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+numEdge.3.JGLgroup <- (length(which(abs(Precision_estimated_array[[3]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
 
-numSharedEdges.JGLgroup <- sum(Reduce("&", lapply(Precision_estimated_array, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array[[1]])])  # Shared edges
+numSharedEdges.JGLgroup <- sum(Reduce("&", lapply(Precision_estimated_array, function(M) abs(M) > 1e-4))[upper.tri(Precision_estimated_array[[1]])])  # Shared edges
 
 summaryEdges.JGLgroup <- c(numEdge.1.JGLgroup, numEdge.2.JGLgroup, numEdge.3.JGLgroup, numSharedEdges.JGLgroup)
 
@@ -219,13 +219,13 @@ lambda_opt_pared <- c(0.101, 0.27) # from observation
 JGL_result_pared <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt_pared[1], lambda2=lambda_opt_pared[2])
 Precision_estimated_array_pared <- JGL_result_pared$theta
 
-numEdge.1.JGLgroup.pared <- (length(which(abs(Precision_estimated_array_pared[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+numEdge.1.JGLgroup.pared <- (length(which(abs(Precision_estimated_array_pared[[1]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
 
-numEdge.2.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+numEdge.2.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[2]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
 
-numEdge.3.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+numEdge.3.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[3]]) > 10 ^ -4)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
 
-numSharedEdges.JGLgroup.pared <- sum(Reduce("&", lapply(Precision_estimated_array_pared, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array_pared[[1]])])  # Shared edges
+numSharedEdges.JGLgroup.pared <- sum(Reduce("&", lapply(Precision_estimated_array_pared, function(M) abs(M) > 1e-4))[upper.tri(Precision_estimated_array_pared[[1]])])  # Shared edges
 
 summaryEdges.JGLgroup.pared <- c(numEdge.1.JGLgroup.pared, numEdge.2.JGLgroup.pared, numEdge.3.JGLgroup.pared, numSharedEdges.JGLgroup.pared)
 
@@ -284,5 +284,6 @@ write.csv(CompTimeJGL, file = "CompTimes_casestudy.csv", row.names = FALSE)
 
 
 summaryEdges.JGLgroup
+
 
 summaryEdges.JGLgroup.pared
