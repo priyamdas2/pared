@@ -445,7 +445,7 @@ The following table reports the number of edges in the models selected by the AI
 | OV            |       63      |        34        |
 | UCEC          |       78      |        46        |
 | UCS           |       81      |        49        |
-| Shared        |       31      |        26        |
+| Shared        |       31      |        27        |
 
 The reproducible code used to obtain the analysis results of this case study section, along with other supplementary files, is provided in the `case study` folder.
 
