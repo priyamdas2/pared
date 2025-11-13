@@ -344,7 +344,9 @@ combined <- image_append(c(img1, img2, img3))
 print(combined)
 image_write(combined, path = "precision_heatmaps_combined.jpg", format = "jpg")
 ```
-</details>  
+</details> 
+
+![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
 - Then we explore the Pareto front of solutions using the `pared_JGL` function.
 
@@ -356,6 +358,8 @@ CompTimeJGL <- (end_time - start_time)["elapsed"]
 result$summary_table
 result$figure
 ```
+
+![case_study_pred_JGL](images/plot_JGL_casestudy.jpg)
 
 - From the set of candidate optimal solutions, we select (λ₁ = 0.101, λ₂ = 0.27) and visualize the precision matrices associated with the proteomic networks for these cancers.
 
@@ -429,12 +433,6 @@ print(combined)
 image_write(combined, path = "precision_heatmaps_pared_combined.jpg", format = "jpg")
 ```
 </details>
-
-![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
-
-Now using `pared_JGL()`, we identify the set of Pareto-optimal points and reconstruct the network corresponding to one such solution with  (λ₁, λ₂) = (0.101, 0.27). 
-
-![case_study_pred_JGL](images/plot_JGL_casestudy.jpg)
 
 Corresponding to (λ₁, λ₂) = (0.101, 0.27), the estimated network obtained using JGL with a group penalty is found to be sparser than that obtained using the conventional approach of minimizing AIC. Corresponding pan-cancer proteomic networks are provided below. The reproducible code used to obtain the analysis results of this case study section is provided in the `case study` folder.
 
