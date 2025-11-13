@@ -139,7 +139,6 @@ res <- pared_fit(X, y,
 
 plot(res)
 ```
-<details>
 
 ![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
