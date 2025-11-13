@@ -440,8 +440,8 @@ Corresponding to (λ₁, λ₂) = (0.101, 0.27), the estimated network obtained 
 
 The following table reports the number of edges in the models selected by the AIC criterion and in our chosen model from the Pareto front generated using the `pared_JGL` function.
 
-| Num. of edges | Group JGL-AIC |  Group JGL-pared |
-|---------------|:-------------:|:----------------:|
+| Edge counts across cancer types | Group JGL–AIC | Group JGL–pared |
+|---------------------------------|:-------------:|:----------------:|
 | OV            |       63      |        34        |
 | UCEC          |       78      |        46        |
 | UCS           |       81      |        49        |
