@@ -124,10 +124,10 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
-Below, first we highlight the code used to extract the dataset.
+- Below, first we highlight the code used to extract the dataset.
 
 <details>
-<summary>Show R code for data extraction</summary>
+<summary><u><strong>Show R code for data extraction</strong></u></summary>
 
 ```r
 # List of cancers to work with: OV, UCEC, UCS
