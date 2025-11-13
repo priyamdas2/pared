@@ -1,7 +1,7 @@
 #remove.packages("pared")
 library(tictoc)
 # Install packages
-devtools::install_github("priyamdas2/pared", force = TRUE)
+# devtools::install_github("priyamdas2/pared", force = TRUE)
 # load library
 library(pared)
 

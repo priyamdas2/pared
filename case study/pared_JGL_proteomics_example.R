@@ -1,10 +1,35 @@
 # List of cancers to work with: OV, UCEC, UCS
 rm(list=ls())
 setwd("U:/MOOP_Christine/Github_vignette/case study")
+#devtools::install_github("priyamdas2/pared", force = TRUE)
 library(pared)
 library(ggplot2)
 library(reshape2)
 library(magick)
+library(igraph)
+
+################################################################################
+### Sourcing JGL functions #####################################################
+################################################################################
+source("JGL supp funs/admm.iters.R")
+source("JGL supp funs/admm.iters.unconnected.R")
+source("JGL supp funs/crit.R")
+source("JGL supp funs/dsgl.R")
+source("JGL supp funs/flsa.general.R")
+source("JGL supp funs/flsa2.R")
+source("JGL supp funs/gcrit.R")
+source("JGL supp funs/JGL.R")
+source("JGL supp funs/make.adj.matrix.R")
+source("JGL supp funs/net.degree.R")
+source("JGL supp funs/net.edges.R")
+source("JGL supp funs/net.hubs.R")
+source("JGL supp funs/net.neighbors.R")
+source("JGL supp funs/penalty.as.matrix.R")
+source("JGL supp funs/screen.fgl.R")
+source("JGL supp funs/screen.ggl.R")
+source("JGL supp funs/soft.R")
+source("JGL supp funs/subnetworks.R")
+
 ################################################################################
 ### Reading dataset ############################################################
 ################################################################################
@@ -77,10 +102,8 @@ sample_sizes <- c(dim(OV)[1], dim(UCEC)[1], dim(UCS)[1])
 ### Fitting JGL ################################################################
 ################################################################################
 
-library(JGL)
 library(mvtnorm)
 library(psych)
-
 
 
 sample <- ALL_samples
@@ -114,11 +137,16 @@ lambda_opt <- c(lambda_ones[min_index[1]], lambda_twos[min_index[2]])
 JGL_result_final <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt[1], lambda2=lambda_opt[2])
 Precision_estimated_array <- JGL_result_final$theta
 
-(length(which(abs(Precision_estimated_array[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+numEdge.1.JGLgroup <- (length(which(abs(Precision_estimated_array[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
 
-(length(which(abs(Precision_estimated_array[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+numEdge.2.JGLgroup <- (length(which(abs(Precision_estimated_array[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
 
-(length(which(abs(Precision_estimated_array[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+numEdge.3.JGLgroup <- (length(which(abs(Precision_estimated_array[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+
+numSharedEdges.JGLgroup <- sum(Reduce("&", lapply(Precision_estimated_array, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array[[1]])])  # Shared edges
+
+summaryEdges.JGLgroup <- c(numEdge.1.JGLgroup, numEdge.2.JGLgroup, numEdge.3.JGLgroup, numSharedEdges.JGLgroup)
+
 
 ################################################################################
 ### PLOT: JGL group ############################################################
@@ -187,17 +215,19 @@ result$summary_table
 result$figure
 
 
-
-
 lambda_opt_pared <- c(0.101, 0.27) # from observation
 JGL_result_pared <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt_pared[1], lambda2=lambda_opt_pared[2])
 Precision_estimated_array_pared <- JGL_result_pared$theta
 
-(length(which(abs(Precision_estimated_array_pared[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+numEdge.1.JGLgroup.pared <- (length(which(abs(Precision_estimated_array_pared[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
 
-(length(which(abs(Precision_estimated_array_pared[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+numEdge.2.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
 
-(length(which(abs(Precision_estimated_array_pared[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+numEdge.3.JGLgroup.pared <-(length(which(abs(Precision_estimated_array_pared[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+
+numSharedEdges.JGLgroup.pared <- sum(Reduce("&", lapply(Precision_estimated_array_pared, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array_pared[[1]])])  # Shared edges
+
+summaryEdges.JGLgroup.pared <- c(numEdge.1.JGLgroup.pared, numEdge.2.JGLgroup.pared, numEdge.3.JGLgroup.pared, numSharedEdges.JGLgroup.pared)
 
 
 tol <- 1e-3
@@ -251,3 +281,8 @@ print(combined)
 image_write(combined, path = "precision_heatmaps_pared_combined.jpg", format = "jpg")
 
 write.csv(CompTimeJGL, file = "CompTimes_casestudy.csv", row.names = FALSE)
+
+
+summaryEdges.JGLgroup
+
+summaryEdges.JGLgroup.pared
