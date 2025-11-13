@@ -126,6 +126,7 @@ We consider The Cancer Genome Atlas (TCGA) proteomic data for three related canc
 
 Below we highlight the code used to extract the dataset.
 
+<details>
 <summary>Show R code</summary>
 
 ```r
@@ -138,6 +139,7 @@ res <- pared_fit(X, y,
 
 plot(res)
 ```
+<details>
 
 ![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
