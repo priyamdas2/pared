@@ -127,11 +127,8 @@ We consider The Cancer Genome Atlas (TCGA) proteomic data for three related canc
 - Below, first we highlight the code used to extract the dataset.
 
 <details>
-<summary>
-<span style="background:#eef; padding:6px 10px; border-radius:6px; font-weight:bold;">
-Show R code
-</span>
-</summary>
+<summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
+
   
 ```r
 # List of cancers to work with: OV, UCEC, UCS
