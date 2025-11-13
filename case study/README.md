@@ -1,1 +1,1 @@
-
+- Run `pared_JGL_proteomics_example.R` to reproduce the case study results.
