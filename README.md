@@ -124,7 +124,7 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
-- Below, first we highlight the code used to extract the dataset.
+- Below, first we highlight the code used to extract the proteomic data on *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS).
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
@@ -232,6 +232,119 @@ sample_sizes <- c(dim(OV)[1], dim(UCEC)[1], dim(UCS)[1])
 ```
 </details>
 
+- Following data extraction, we fit group JGL, and choose the optimal (λ₁, λ₂) based on AIC, and plot the estimated precision matrices for the cancers. 
+
+<details>
+<summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
+
+```r
+################################################################################
+### Fitting JGL ################################################################
+################################################################################
+
+library(mvtnorm)
+library(psych)
+
+
+sample <- ALL_samples
+total_lambda_divisions <- 20
+start_lambda <- 0.01
+end_lambda <- 1
+lambda_ones <- exp(seq(from = log(start_lambda), to = log(end_lambda), length.out= total_lambda_divisions))
+lambda_twos <- exp(seq(from = log(start_lambda), to = log(end_lambda), length.out = total_lambda_divisions))
+AIC_all_possible <- matrix(10 ^ 10, total_lambda_divisions, total_lambda_divisions)
+for(i in 1:total_lambda_divisions) {
+  for(j in 1:total_lambda_divisions) {
+    JGL_result <- JGL(sample, penalty="group", lambda1 = lambda_ones[i], lambda2 = lambda_twos[j])
+    Precision_estimated <- JGL_result$theta
+    if(length(Precision_estimated[[1]]) == p^2) {
+      num_non_zero_edges <- rep(0,C)
+      AIC_sum <- 0
+      for(c in 1:C){
+        num_non_zero_edges[c] <- (length(which(abs(Precision_estimated[[c]])>0.0001))-20)/2
+        S_mat <- t(sample[[c]]) %*% sample[[c]]
+        AIC_sum <- AIC_sum + sample_sizes[c] * tr(S_mat %*% Precision_estimated[[c]]) - 
+        sample_sizes[c] * log(det(Precision_estimated[[c]])) + 2 * num_non_zero_edges[c]
+        }
+      AIC_all_possible[i,j] <- AIC_sum
+    }
+  }
+}
+
+min_index <- which(AIC_all_possible == min(AIC_all_possible), arr.ind = TRUE)
+lambda_opt <- c(lambda_ones[min_index[1]], lambda_twos[min_index[2]])
+
+JGL_result_final <- JGL(ALL_samples, penalty="group", lambda1 = lambda_opt[1], lambda2=lambda_opt[2])
+Precision_estimated_array <- JGL_result_final$theta
+
+numEdge.1.JGLgroup <- (length(which(abs(Precision_estimated_array[[1]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 1
+
+numEdge.2.JGLgroup <- (length(which(abs(Precision_estimated_array[[2]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 2
+
+numEdge.3.JGLgroup <- (length(which(abs(Precision_estimated_array[[3]]) > 10 ^ -3)) - p) / 2  # Number of non-zeros in Prec. Mat. 3
+
+numSharedEdges.JGLgroup <- sum(Reduce("&", lapply(Precision_estimated_array, function(M) abs(M) > 1e-3))[upper.tri(Precision_estimated_array[[1]])])  # Shared edges
+
+summaryEdges.JGLgroup <- c(numEdge.1.JGLgroup, numEdge.2.JGLgroup, numEdge.3.JGLgroup, numSharedEdges.JGLgroup)
+
+
+################################################################################
+### PLOT: JGL group ############################################################
+################################################################################
+
+tol <- 1e-3
+cancer_names <- c("Ovarian Cancer (AIC)", 
+                  "Uterine Corpus Endometrial Carcinoma (AIC)",
+                  "Uterine Carcinosarcoma (AIC)")
+
+for (k in 1:3) {
+  mat <- Precision_estimated_array[[k]]
+  rownames(mat) <- colnames(mat) <- proteins_here
+  
+  mat_melt <- melt(mat)
+  colnames(mat_melt) <- c("Row", "Col", "Value")
+  
+  # Reverse column order
+  mat_melt$Col <- factor(mat_melt$Col, levels = rev(proteins_here))
+  
+  mat_melt$Color <- ifelse(abs(mat_melt$Value) < tol, "Zero",
+                           ifelse(mat_melt$Value > 0, "Positive", "Negative"))
+  
+  mat_melt$Label <- ifelse(abs(mat_melt$Value) > tol,
+                           sprintf("%.2f", mat_melt$Value),
+                           "")
+  
+  plot_here <- ggplot(mat_melt, aes(x = Col, y = Row, fill = Color)) +
+    geom_tile(color = "grey90") +
+    geom_text(aes(label = Label), size = 3) + #, fontface = "bold") +
+    scale_fill_manual(values = c("Zero" = "white", "Positive" = "salmon", "Negative" = "skyblue")) +
+    scale_x_discrete(position = "top") +
+    theme_minimal(base_size = 12) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 0),
+      axis.title = element_blank(),
+      panel.grid = element_blank()
+    ) +
+    ggtitle(cancer_names[k])
+  
+  print(plot_here)
+  ggsave(filename = paste0("precision_heatmap_", k, ".jpg"), plot = plot_here,
+         width = 8, height = 7, dpi = 300)
+}
+
+
+
+# Read images
+img1 <- image_read("precision_heatmap_1.jpg")
+img2 <- image_read("precision_heatmap_2.jpg")
+img3 <- image_read("precision_heatmap_3.jpg")
+
+
+combined <- image_append(c(img1, img2, img3))
+print(combined)
+image_write(combined, path = "precision_heatmaps_combined.jpg", format = "jpg")
+```
+</details>   
 
 
 ![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
