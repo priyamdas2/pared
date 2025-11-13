@@ -127,7 +127,6 @@ We consider The Cancer Genome Atlas (TCGA) proteomic data for three related canc
 - Below, first we highlight the code used to extract the dataset.
 
 <details>
-<summary><u><strong>Show R code for data extraction</strong></u></summary>
 <summary>
 <span style="background:#eef; padding:6px 10px; border-radius:6px; font-weight:bold;">
 Show R code
