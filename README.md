@@ -124,6 +124,21 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
+Below we highlight the code used to extract the dataset.
+
+<summary>Show R code</summary>
+
+```r
+# Example: R code here
+library(pared)
+
+res <- pared_fit(X, y,
+                 penalty = "lasso",
+                 nlambda = 50)
+
+plot(res)
+```
+
 ![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
 Now using `pared_JGL()`, we identify the set of Pareto-optimal points and reconstruct the network corresponding to one such solution with  (λ₁, λ₂) = (0.101, 0.27). 
