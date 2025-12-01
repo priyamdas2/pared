@@ -41,6 +41,23 @@ A screenshot of the generated interactive plotly plot is provided below.
 
 ![Pareto-frontier JGL-group Plot Preview screenshot](images/plot_JGL_group.jpg)
 
+Fitting back JGL with group penalty for any given values of λ₁ (= 0.025) and λ₂ (= 0.945).
+
+```r
+devtools::install_github("patrickjdanaher/JGL-package", force = TRUE)
+library(JGL)
+
+lambda.opt.pared <- c(0.025, 0.945) 
+JGL.result.pared <- JGL(sample_data, penalty="group", lambda1 = lambda.opt.pared[1], lambda2=lambda.opt.pared[2])
+Precision.estimated.array <- JGL.result.pared$theta
+
+# Print precision matrices 1, 2, 3 and 4
+print(Precision.estimated.array[[1]])
+print(Precision.estimated.array[[2]])
+print(Precision.estimated.array[[3]])
+print(Precision.estimated.array[[4]])
+```
+
 ### JGL with fused penalty
 Following example code identifies the Pareto-optimal points for Fused JGL.
 
@@ -115,7 +132,9 @@ result$figure
 
 A screenshot of the generated interactive plotly plot is provided below.
 ![Pareto-frontier FLasso Plot Preview screenshot](images/plot_FLasso.jpg)
+
 Fitting back Fused Lasso for any given values of λ₁ (= 0.146) and λ₂ (= 0.002).
+
 ```r
 # Fitting fused lasso with desired lambda_1 and lambda_2 values
 
