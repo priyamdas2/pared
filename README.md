@@ -41,7 +41,7 @@ A screenshot of the generated interactive plotly plot is provided below.
 
 ![Pareto-frontier JGL-group Plot Preview screenshot](images/plot_JGL_group.jpg)
 
-Fitting back JGL with group penalty for any given values of λ₁ (= 0.025) and λ₂ (= 0.945).
+Fitting back JGL with 'group' penalty for any given values of λ₁ (= 0.025) and λ₂ (= 0.945).
 
 ```r
 # Install JGL package from github (if github installation doesn't work, see
@@ -54,14 +54,14 @@ library(JGL)
 
 lambda.opt.pared <- c(0.025, 0.945) 
 JGL.result.pared <- JGL(sample_data, penalty="group", lambda1 = lambda.opt.pared[1], lambda2=lambda.opt.pared[2])
-Precision.estimated.array <- JGL.result.pared$theta
+Precision.estimated.array.group <- JGL.result.pared$theta
 
 # Print precision matrices 1, 2, 3 and 4
 
-print(Precision.estimated.array[[1]])
-print(Precision.estimated.array[[2]])
-print(Precision.estimated.array[[3]])
-print(Precision.estimated.array[[4]])
+print(Precision.estimated.array.group[[1]])
+print(Precision.estimated.array.group[[2]])
+print(Precision.estimated.array.group[[3]])
+print(Precision.estimated.array.group[[4]])
 ```
 
 ### JGL with fused penalty
@@ -79,6 +79,24 @@ resultFused$figure
 A screenshot of the generated interactive plotly plot is provided below.
 
 ![Pareto-frontier JGL-fused Plot Preview screenshot](images/plot_JGL_fused.jpg)
+
+Fitting back JGL with 'fused' penalty for any given values of λ₁ (= 0.095) and λ₂ (= 0.293).
+
+```r
+# Fitting JGL with fused penalty for λ₁ = 0.095 and λ₂ = 0.293
+
+lambda.opt.pared <- c(0.095, 0.293) 
+JGL.result.pared <- JGL(sample_data, penalty="fused", lambda1 = lambda.opt.pared[1], lambda2=lambda.opt.pared[2])
+Precision.estimated.array.fused <- JGL.result.pared$theta
+
+# Print precision matrices 1, 2, 3 and 4
+
+print(Precision.estimated.array.fused[[1]])
+print(Precision.estimated.array.fused[[2]])
+print(Precision.estimated.array.fused[[3]])
+print(Precision.estimated.array.fused[[4]])
+```
+
 
 ## Elastic-Net
 
