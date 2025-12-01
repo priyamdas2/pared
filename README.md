@@ -18,16 +18,19 @@ devtools::install_github("priyamdas2/pared", force = TRUE)
 # load library
 library(pared)
 ```
-<u><b>Access JGL package: </b></u> Functions from `JGL` pakage are included within the `pared` package's source R files to avoid dependency on external sources (e.g., R CRAN/github); however, it should be noted that, to use `JGL` functions outside `pared` package functions, you need to either install or source those `JGL` package functions. Here we describe two ways to install it:
+<u><b>Accessing the JGL Package:</b></u>  
+Functions from the `JGL` package are included within the source R files of the `pared` package to avoid dependencies on external repositories (e.g., CRAN or GitHub). However, to use `JGL` functions **outside** of the `pared` package functions, you must either install the `JGL` package separately or source its functions manually. Below we describe two ways to do so:
 
-1. (a) <b> Installation from github: </b> In order to install it from github, one may run the following R code:
+(a) <b>Installation from GitHub:</b>  
+To install the `JGL` package directly from GitHub, run the following R commands:
 
 ```r
 devtools::install_github("patrickjdanaher/JGL-package", force = TRUE)
 library(JGL)
 ```
 
-2. (b) <b> Sourcing from github: </b> In order to source the raw source files of `JGL` withOUt going to any other external links, one may download all the functions within folder [pared/R]([https://arxiv.org/abs/2412.05998](https://github.com/priyamdas2/pared/tree/main/R)) folder, and save them under a folder named 'JGL supp funs', and then read them into R memory, along with loading additional libraries as follows:
+(b) <b>Sourcing from GitHub:</b>
+To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R]([https://arxiv.org/abs/2412.05998](https://github.com/priyamdas2/pared/tree/main/R)) save them in a local directory named JGL_supp_funs, and then source them into your R session along with the required supporting libraries as follows:
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
