@@ -50,6 +50,8 @@ Fitting back JGL with group penalty for any given values of λ₁ (= 0.025) and 
 devtools::install_github("patrickjdanaher/JGL-package", force = TRUE)
 library(JGL)
 
+# Fitting JGL with group penalty for λ₁ = 0.025 and λ₂ = 0.945
+
 lambda.opt.pared <- c(0.025, 0.945) 
 JGL.result.pared <- JGL(sample_data, penalty="group", lambda1 = lambda.opt.pared[1], lambda2=lambda.opt.pared[2])
 Precision.estimated.array <- JGL.result.pared$theta
