@@ -33,7 +33,7 @@ library(JGL)
 
 (b) <b>Sourcing from GitHub:</b>
 
-To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R](https://github.com/priyamdas2/pared/tree/main/R), save them in R working directory named `JGL supp funs`, and then source them into your R session along with the required supporting libraries as follows. Instead of downloading the R files one at a time, users may download the entire directory by visiting the [pared](https://github.com/priyamdas2/pared) repository and clicking **<> Code → Download ZIP**. After downloading, extract the ZIP file and copy the entire `R` folder into the desired working directory.
+To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R](https://github.com/priyamdas2/pared/tree/main/R), save them in R working directory named `JGL supp funs`, and then source them into your R session along with the required supporting libraries as follows. Instead of downloading the R files one at a time, users may download the entire directory by visiting the [pared](https://github.com/priyamdas2/pared) repository and clicking **<> Code → Download ZIP**. After downloading, extract the ZIP file and copy the entire `R` folder into the desired working directory, and rename it to `JGL supp funs`.
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
