@@ -44,6 +44,8 @@ A screenshot of the generated interactive plotly plot is provided below.
 Fitting back JGL with group penalty for any given values of λ₁ (= 0.025) and λ₂ (= 0.945).
 
 ```r
+# Install JGL package from github (if the github installation doesn't work, see aformentioned instructions on loading functions in JGL package without installation)
+
 devtools::install_github("patrickjdanaher/JGL-package", force = TRUE)
 library(JGL)
 
