@@ -18,6 +18,50 @@ devtools::install_github("priyamdas2/pared", force = TRUE)
 # load library
 library(pared)
 ```
+<u><b>Access JGL package: </b></u> Functions from `JGL` pakage are included within the `pared` package's source R files to avoid dependency on external sources (e.g., R CRAN/github); however, it should be noted that, to use `JGL` functions outside `pared` package functions, you need to either install or source those `JGL` package functions. Here we describe two ways to install it:
+
+1. <b> Installation from github: </b> In order to install it from github, one may run the following R code:
+
+```r
+devtools::install_github("patrickjdanaher/JGL-package", force = TRUE)
+library(JGL)
+```
+
+2. <b> Sourcing from github: </b> In order to source the raw source files of `JGL` withOUt going to any other external links, one may download all the functions within folder [pared/R]([https://arxiv.org/abs/2412.05998](https://github.com/priyamdas2/pared/tree/main/R)) folder, and save them under a folder named 'JGL supp funs', and then read them into R memory, along with loading additional libraries as follows:
+
+<details>
+<summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
+
+```r
+library(ggplot2)
+library(reshape2)
+library(magick)
+library(igraph)
+
+################################################################################
+### Sourcing JGL functions #####################################################
+################################################################################
+source("JGL supp funs/admm.iters.R")
+source("JGL supp funs/admm.iters.unconnected.R")
+source("JGL supp funs/crit.R")
+source("JGL supp funs/dsgl.R")
+source("JGL supp funs/flsa.general.R")
+source("JGL supp funs/flsa2.R")
+source("JGL supp funs/gcrit.R")
+source("JGL supp funs/JGL.R")
+source("JGL supp funs/make.adj.matrix.R")
+source("JGL supp funs/net.degree.R")
+source("JGL supp funs/net.edges.R")
+source("JGL supp funs/net.hubs.R")
+source("JGL supp funs/net.neighbors.R")
+source("JGL supp funs/penalty.as.matrix.R")
+source("JGL supp funs/screen.fgl.R")
+source("JGL supp funs/screen.ggl.R")
+source("JGL supp funs/soft.R")
+source("JGL supp funs/subnetworks.R")
+```
+</details>
+
 ## Joint Graphical LASSO
 The function `pared_JGL()` generates an interactive 3D Pareto front plot for the Joint Graphical Lasso (JGL) using GP-based optimization. It supports both group and fused penalties. Additionally, it provides the list of Pareto-optimal values of the tuning parameters λ₁ and λ₂.
 ```r
