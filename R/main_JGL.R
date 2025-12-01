@@ -453,6 +453,8 @@ pared_JGL <- function(sample_list, lb = c(-2, -2), ub = c(0, 0),
   Summary.Table.temp <- cbind(round(unique.opt.params, 3), Solution)
   Summary.Table <- Summary.Table.temp
   Summary.Table[, 4] <- - Summary.Table.temp[, 4]
+  Summary.Table[, 1] <- round(10 ^ Summary.Table[, 1], 3)
+  Summary.Table[, 2] <- round(10 ^ Summary.Table[, 2], 3)
   
   if(method == "group") {
     colnames(Summary.Table) <- c("lambda1", "lambda2", "total edges", "shared edges", "AIC")
@@ -624,4 +626,5 @@ fix_matrix <- function(A, denom_factor) {
   A <- (A + t(A)) / 2
   
   return(A)
+
 }
