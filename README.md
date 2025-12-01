@@ -75,15 +75,19 @@ y <- X[, 1:2] %*% beta.true + rnorm(n)
 A <- pared_ENet(X, y, Pareto_budget = 50)
 A$summary_table
 A$fig
+```
+A screenshot of the generated interactive plotly plot is provided below.
+![Pareto-frontier ENet Plot Preview screenshot](images/plot_ENet.jpg)
 
+Fitting back Elastic Net for any given values of 𝛼 (= 0.617) and λ (= 10 ^ (- 0.22)).
+
+```r
 # Fitting elastic net with desired alpha and lambda values
 
 library(glmnet)
 ElasticNet.fit <- glmnet(X, y, alpha = 0.617, lambda = 10 ^ (- 0.22))
 print(ElasticNet.fit$beta)
 ```
-A screenshot of the generated interactive plotly plot is provided below.
-![Pareto-frontier ENet Plot Preview screenshot](images/plot_ENet.jpg)
 
 
 ## Fused LASSO
