@@ -57,6 +57,7 @@ JGL.result.pared <- JGL(sample_data, penalty="group", lambda1 = lambda.opt.pared
 Precision.estimated.array <- JGL.result.pared$theta
 
 # Print precision matrices 1, 2, 3 and 4
+
 print(Precision.estimated.array[[1]])
 print(Precision.estimated.array[[2]])
 print(Precision.estimated.array[[3]])
