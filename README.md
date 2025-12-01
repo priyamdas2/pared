@@ -33,7 +33,7 @@ library(JGL)
 
 (b) <b>Sourcing from GitHub:</b>
 
-To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R](https://github.com/priyamdas2/pared/tree/main/R), save them in R working directory named `JGL supp funs`, and then source them into your R session along with the required supporting libraries as follows:
+To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R](https://github.com/priyamdas2/pared/tree/main/R), save them in R working directory named `JGL supp funs`, and then source them into your R session along with the required supporting libraries as follows. Instead of downloading the R files one at a time, users may download the entire directory by visiting the [pared](https://github.com/priyamdas2/pared) repository and clicking **<> Code → Download ZIP**. After downloading, extract the ZIP file and copy the entire `R` folder into the desired working directory.
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
@@ -227,7 +227,8 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
-- First download the [pared/case study/NExUS data](https://github.com/priyamdas2/pared/tree/main/case%20study/NExUS%20data) folder and ensure that it is saved in your R working directory with the name `NExUS data`.
+- First download the [pared/case study/NExUS data](https://github.com/priyamdas2/pared/tree/main/case%20study/NExUS%20data) folder and ensure that it is saved in your R working directory with the name `NExUS data`. Instead of downloading the files one at a time, users may download the entire directory by visiting the [pared](https://github.com/priyamdas2/pared) repository and clicking **<> Code → Download ZIP**. After downloading, extract the ZIP file and copy the entire `case study/NExUS data` folder into the desired working directory.
+
 - Now we extract proteomic data corresponding to the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast pathways* for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS); code provided below.
 
 <details>
