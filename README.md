@@ -227,7 +227,8 @@ print(beta_opt)
 
 We consider The Cancer Genome Atlas (TCGA) proteomic data for three related cancers: Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS), with sample sizes of 428, 404, and 48, respectively. In total, we consider 20 proteins that collectively represent the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast* pathways. We first apply the Joint Graphical Lasso (JGL) with a group penalty, varying λ₁ and λ₂, and select the model with the lowest AIC. The estimated precision matrices for the three cancers are shown below.
 
-- First we extract proteomic data corresponding to the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast pathways* for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS).
+- First download the [pared/case study/NExUS data](https://github.com/priyamdas2/pared/tree/main/case%20study/NExUS%20data) folder, and make sure the folder is saved with name 'NExUS data' within your R work directory. 
+- Now we extract proteomic data corresponding to the *breast reactive*, *cell cycle*, *hormone receptor*, and *hormone signaling breast pathways* for Ovarian Cancer (OV), Uterine Corpus Endometrial Carcinoma (UCEC), and Uterine Carcinosarcoma (UCS). In order to do that, 
 
 <details>
 <summary><strong>📌 <span style="color: #0366d6;">Show R code</span></strong></summary>
@@ -242,28 +243,6 @@ library(ggplot2)
 library(reshape2)
 library(magick)
 library(igraph)
-
-################################################################################
-### Sourcing JGL functions #####################################################
-################################################################################
-source("JGL supp funs/admm.iters.R")
-source("JGL supp funs/admm.iters.unconnected.R")
-source("JGL supp funs/crit.R")
-source("JGL supp funs/dsgl.R")
-source("JGL supp funs/flsa.general.R")
-source("JGL supp funs/flsa2.R")
-source("JGL supp funs/gcrit.R")
-source("JGL supp funs/JGL.R")
-source("JGL supp funs/make.adj.matrix.R")
-source("JGL supp funs/net.degree.R")
-source("JGL supp funs/net.edges.R")
-source("JGL supp funs/net.hubs.R")
-source("JGL supp funs/net.neighbors.R")
-source("JGL supp funs/penalty.as.matrix.R")
-source("JGL supp funs/screen.fgl.R")
-source("JGL supp funs/screen.ggl.R")
-source("JGL supp funs/soft.R")
-source("JGL supp funs/subnetworks.R")
 
 ################################################################################
 ### Reading dataset ############################################################
