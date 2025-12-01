@@ -19,9 +19,11 @@ devtools::install_github("priyamdas2/pared", force = TRUE)
 library(pared)
 ```
 <u><b>Accessing the JGL Package:</b></u>  
+
 Functions from the `JGL` package are included within the source R files of the `pared` package to avoid dependencies on external repositories (e.g., CRAN or GitHub). However, to use `JGL` functions **outside** of the `pared` package functions, you must either install the `JGL` package separately or source its functions manually. Below we describe two ways to do so:
 
 (a) <b>Installation from GitHub:</b>  
+
 To install the `JGL` package directly from GitHub, run the following R commands:
 
 ```r
@@ -30,6 +32,7 @@ library(JGL)
 ```
 
 (b) <b>Sourcing from GitHub:</b>
+
 To source the raw JGL function files without relying on any external package installation, download all the R files from the folder [pared/R](https://github.com/priyamdas2/pared/tree/main/R), save them in a local directory named 'JGL supp funs', and then source them into your R session along with the required supporting libraries as follows:
 
 <details>
