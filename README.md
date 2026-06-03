@@ -3,6 +3,13 @@
 `pared` is an R package for model selection and hyperparameter tuning using multi-objective optimization. Instead of reducing model selection to a single criterion, `pared` identifies Pareto-optimal solutions that represent trade-offs among competing objectives, such as prediction error, sparsity, model complexity, coefficient magnitude, graph structure, and goodness of fit.
 
 The package is built around six main user-facing functions.
+---
+## 📚 Citation
+
+> Das P, Robinson S, Peterson C (2026).  
+> *pared: Model selection using multi-objective optimization*.  
+> **ArXiv**: [https://arxiv.org/abs/2505.21730](https://arxiv.org/abs/2505.21730)
+---
 
 ## Table of Contents
 - [Main functions](#main-functions)
