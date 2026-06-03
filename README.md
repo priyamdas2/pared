@@ -261,6 +261,11 @@ fig2d <- plot_pared_2d(
 fig2d
 ```
 
+<p align="center">
+  <img src="images/plot_2_SVD_2d.png" width="60%" />
+</p>
+
+
 We can also visualize three objectives at a time. The next plot displays the trade-off among probability quality, model complexity, and computation. Here, CV log-loss measures the quality of predicted class probabilities, support-vector fraction measures model complexity, and training time measures computational cost.
 
 ```r
@@ -276,6 +281,10 @@ fig3d_1 <- plot_pared_3d(
 fig3d_1
 ```
 
+<p align="center">
+  <img src="images/plot_2_SVD_3d_first_example.png" width="60%" />
+</p>
+
 Another useful projection replaces CV log-loss with CV classification error. This view emphasizes the trade-off among prediction accuracy, model complexity, and computation.
 
 ```r
@@ -290,6 +299,10 @@ fig3d_2 <- plot_pared_3d(
 
 fig3d_2
 ```
+
+<p align="center">
+  <img src="images/plot_2_SVD_3d_unconstrained" width="60%" />
+</p>
 
 In some applications, the user may want to impose preference-based or objective-space restrictions. For example, very complex SVMs may be undesirable if they use too many support vectors, and very slow tuning choices may be undesirable in large datasets. The helper function `svm_objective_constrained()` implements this idea by penalizing candidate solutions whose support-vector fraction or training time exceeds specified thresholds.
 
@@ -331,6 +344,11 @@ fig3d_2_constrained <- plot_pared_3d(
 fig3d_2
 fig3d_2_constrained
 ```
+
+<p align="center">
+  <img src="images/plot_2_SVD_3d_unconstrained.png" width="45%" />
+  <img src="images/plot_2_SVD_3d_constrained.png" width="45%" />
+</p>
 
 This example demonstrates the general workflow for applying `pared_optimize()` to a statistical tuning problem: define a tuning-parameter space, construct an objective function returning multiple criteria, specify whether each objective should be minimized or maximized, compute the Pareto front, and visualize selected projections of the resulting trade-off surface.
 
