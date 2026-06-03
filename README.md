@@ -721,7 +721,9 @@ result$summary_table
 result$figure
 ```
 
-![case_study_pred_JGL](images/plot_JGL_casestudy_v3.jpg)
+<p align="center">
+  <img src="images/plot_JGL_casestudy_v3.jpg" width="60%" />
+</p>
 
 - From the set of candidate optimal solutions, we select (λ₁ = 0.101, λ₂ = 0.27) and visualize the precision matrices associated with the proteomic networks for these cancers.
 
