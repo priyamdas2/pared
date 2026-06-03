@@ -93,11 +93,110 @@ help(package = "pared2026v1")
 ?plot_pared_2d
 ?plot_pared_3d
 ```
-```
-
 ---
 
 ## Basic Pareto Front Example
+
+## 📈 Basic Pareto Front Example
+
+The main function in `pared` is `pared_optimize()`. It is designed for situations where a user wants to tune one or more parameters, but the quality of a solution is measured using more than one criterion. Instead of combining all criteria into a single number, `pared_optimize()` searches for Pareto-optimal solutions, meaning solutions for which no objective can be improved without making at least one other objective worse.
+
+To use `pared_optimize()`, the user needs to provide an objective function. This objective function should take a numeric vector of tuning/search parameters as input and return a numeric vector containing multiple objective values. Each objective can be set to either `"min"` or `"max"` depending on whether smaller or larger values are preferred.
+
+In this toy example, we optimize a three-dimensional vector
+
+\[
+z = (z_1,z_2,z_3),
+\]
+
+where each coordinate is constrained to lie between 1 and 2. Therefore, the search space is
+
+\[
+1 \leq z_j \leq 2, \qquad j=1,2,3.
+\]
+
+We define three objectives:
+
+1. the arithmetic mean of \(z_1,z_2,z_3\), which we want to maximize;
+2. the harmonic mean of \(z_1,z_2,z_3\), which we want to minimize;
+3. the mean absolute deviation from 1.5, which we want to minimize.
+
+Although this example is not based on a statistical model, it illustrates the required input structure for `pared_optimize()`.
+
+```r
+toy_objective <- function(z) c(Mean = mean(z),
+                              Harmonic_mean = length(z) / sum(1 / z),
+                              MAD_from_1.5 = mean(abs(z - 1.5)))
+```
+
+The function `toy_objective()` takes a candidate vector `z` and returns three objective values. The names inside the returned vector are optional, but they make the code easier to read. The important point is that the order of the returned objectives must match the order used in `objective_names` and `objective_directions` below.
+
+Next, we run the Pareto optimization. The arguments `lower` and `upper` define the search region for the three components of `z`. Since `lower = c(1, 1, 1)` and `upper = c(2, 2, 2)`, the optimizer searches over vectors with all three coordinates between 1 and 2.
+
+```r
+set.seed(1)
+
+toy_res <- pared_optimize(objective_fun = toy_objective,
+                          lower = c(1, 1, 1),
+                          upper = c(2, 2, 2),
+                          budget = 30,
+                          parameter_names = c("z1", "z2", "z3"),
+                          objective_names = c("Mean", "Harmonic mean",
+                                              "MAD around 1.5"),
+                          objective_directions = c("max", "min", "min"),
+                          verbose = FALSE)
+```
+
+Here, `budget = 30` specifies the number of objective-function evaluations used in the Gaussian-process-based Pareto search. The argument `parameter_names` labels the search parameters, while `objective_names` labels the three objectives returned by `toy_objective()`.
+
+The argument `objective_directions` is especially important. In this example,
+
+```r
+objective_directions = c("max", "min", "min")
+```
+
+means that we want to maximize the first objective, minimize the second objective, and minimize the third objective. Thus, `pared_optimize()` can handle mixed optimization goals across objectives.
+
+The Pareto-optimal solutions can be printed as a summary table.
+
+```r
+print(toy_res$summary_table)
+```
+
+Each row of `toy_res$summary_table` corresponds to a Pareto-optimal candidate. The table includes both the selected parameter values, `z1`, `z2`, and `z3`, and the corresponding objective values. These are the trade-off solutions identified by the optimizer.
+
+For a pairwise view of the Pareto front, we can plot two objectives at a time. The following plot displays the trade-off between maximizing the mean and minimizing the deviation around 1.5.
+
+```r
+plot_pared_2d(toy_res,
+              x_objective = "Mean",
+              y_objective = "MAD around 1.5",
+              plot_title = "Toy Pareto front")
+```
+
+The 2D plot is useful when the user wants to inspect a specific pair of objectives. However, since the full example contains three objectives, we can also visualize all three objectives simultaneously using `plot_pared_3d()`.
+
+```r
+plot_pared_3d(toy_res,
+              x_objective = "Mean",
+              y_objective = "Harmonic mean",
+              z_objective = "MAD around 1.5",
+              plot_title = "Toy Pareto front",
+              plot_marker_color = "blue")
+```
+
+This 3D plot shows the Pareto-optimal trade-offs among all three objectives. Points on the plot correspond to candidate vectors \(z\) that lie on the Pareto front. Hovering over a point displays the corresponding parameter values, allowing the user to inspect which choices of \(z_1,z_2,z_3\) produce each trade-off.
+
+This basic example illustrates the general workflow of `pared_optimize()`:
+
+1. define a search space using `lower` and `upper`;
+2. write an objective function that returns multiple criteria;
+3. specify whether each criterion should be minimized or maximized;
+4. run `pared_optimize()`;
+5. inspect the Pareto-optimal solutions numerically and graphically.
+
+---
+
 
 ## General Pareto Front Example: SVM
 
