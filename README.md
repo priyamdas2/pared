@@ -11,7 +11,7 @@
 
 ## Table of Contents
 - [Main functions](#main-functions)
-- [Installation](#installation)
+- [⚙️ Installation](#installation)
 - [Basic Pareto Front Example](#toy-example)
 - [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
 - [Joint Graphical LASSO](#joint-graphical-lasso)
