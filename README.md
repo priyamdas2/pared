@@ -155,7 +155,7 @@ print(toy_res$summary_table)
 
 Each row of `toy_res$summary_table` corresponds to a Pareto-optimal candidate. The table includes both the selected parameter values, `z1`, `z2`, and `z3`, and the corresponding objective values. These are the trade-off solutions identified by the optimizer.
 
-For a pairwise view of the Pareto front, we can plot two objectives at a time. The following plot displays the trade-off between maximizing the mean and minimizing the deviation around 1.5.
+For a pairwise view, we can plot two objectives at a time. The following plot displays the Pareto-optimal solutions found from the full three-objective optimization, but visualized only through the two selected objectives: `Mean` and `MAD around 1.5`. Thus, this is a two-dimensional projection of the Pareto front obtained using all three objectives, not necessarily the same Pareto front that would be obtained if the optimization were run using only these two objectives.
 
 ```r
 plot_pared_2d(toy_res,
