@@ -8,6 +8,12 @@
 > *pared: Model selection using multi-objective optimization*.  
 > **ArXiv**: [https://arxiv.org/abs/2505.21730](https://arxiv.org/abs/2505.21730)
 
+## 💻 Code citation
+
+If you use this code, please cite the archived Zenodo release:
+
+[![DOI](https://zenodo.org/badge/20533536.svg)](https://doi.org/10.5281/zenodo.20533536)
+
 ---
 
 ## 📁 File Overview
