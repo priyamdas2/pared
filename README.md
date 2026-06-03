@@ -13,7 +13,7 @@
 ## Table of Contents
 - [Main functions](#main-functions)
 - [Installation](#installation)
-- [Basic Pareto Front Example](#toy-example)
+- [Basic Pareto Front Example](#basic-pareto-front-example)
 - [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
 - [Joint Graphical LASSO](#joint-graphical-lasso)
 - [Elastic-Net](#elastic-net)
