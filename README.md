@@ -356,6 +356,68 @@ This example demonstrates the general workflow for applying `pared_optimize()` t
 
 ## Joint Graphical LASSO
 
+This example illustrates Pareto-based tuning for Joint Graphical LASSO (JGL), where the goal is to estimate multiple related graphical models simultaneously. In this setting, the input is a list of data matrices, where each matrix corresponds to one group or class. Each row represents an observation and each column represents a variable. The estimated precision matrices encode conditional dependence networks within each group.
+
+The function `pared_JGL()` tunes two regularization parameters: `lambda1` and `lambda2`. The first parameter controls overall sparsity of the estimated graphs, while the second controls similarity across groups. Internally, the search is performed over `log10(lambda1)` and `log10(lambda2)`.
+
+The package provides a helper function, `generate_sample()`, to create synthetic multigroup Gaussian data with evolving graph structures. Here, we generate four groups with sample sizes 30, 50, 40, and 70.
+
+```r
+set.seed(1)
+
+sample_data <- generate_sample(sample_sizes = c(30, 50, 40, 70), rand_seed = 1)
+```
+
+We first fit the group graphical LASSO version by setting `method = "group"`. In this case, `pared_JGL()` searches for Pareto-optimal tuning values that balance three objectives: total number of edges, number of shared edges, and AIC. The total number of edges measures graph complexity, the number of shared edges measures common structure across groups, and AIC measures model fit adjusted for complexity.
+
+```r
+jgl_group_res <- pared_JGL(sample_list = sample_data, method = "group", Pareto_budget = 50)
+```
+
+The summary table contains the Pareto-optimal tuning parameters and their corresponding objective values. Each row represents a nondominated JGL solution, meaning that improving one objective would require worsening at least one other objective among the criteria used by the optimizer.
+
+```r
+jgl_group_res$summary_table
+```
+
+The returned object also contains an interactive 3D Pareto-front plot. The plot visualizes the trade-offs among the three JGL objectives, and hovering over a point displays the corresponding tuning-parameter values.
+
+```r
+jgl_group_res$figure
+```
+
+<p align="center">
+  <img src="images/plot_3_JGL_GGL.png" width="60%" />
+</p>
+
+Next, we fit the fused graphical LASSO version by setting `method = "fused"`. This version encourages the estimated precision matrices to be similar across groups. For the fused case, the objectives are total number of edges, mean absolute deviation among estimated precision matrices, and AIC. These objectives summarize sparsity, similarity across group-specific networks, and model fit.
+
+```r
+jgl_fused_res <- pared_JGL(sample_data, method = "fused", Pareto_budget = 50,
+                           plot_marker_color = "blue", plot_marker_symbol = "diamond")
+```
+
+As before, the summary table lists the Pareto-optimal tuning values and objective values.
+
+```r
+jgl_fused_res$summary_table
+```
+
+The corresponding interactive plot displays the Pareto front for the fused graphical LASSO problem. This allows the user to examine how different choices of `lambda1` and `lambda2` affect graph sparsity, cross-group similarity, and model fit.
+
+```r
+jgl_fused_res$figure
+```
+
+<p align="center">
+  <img src="images/plot_3_JGL_FGL.png" width="60%" />
+</p>
+
+This example demonstrates how `pared_JGL()` can be used to tune graphical models when multiple objectives are relevant. Rather than selecting tuning parameters by a single criterion, the Pareto-front view allows the user to inspect a collection of scientifically meaningful trade-off solutions.
+
+
+---
+
 ## Elastic-Net
 
 ## Fused LASSO
