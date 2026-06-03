@@ -1,4 +1,4 @@
-Package: pared2026v1
+Package: pared
 Type: Package
 Title: Pareto-Based Regularization and Multi-Objective Tuning
 Version: 0.1.0
