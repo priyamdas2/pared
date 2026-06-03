@@ -1,3 +1,10 @@
+#' Constrained SVM objective function for README examples
+#'
+#' Internal/example helper exported for convenience.
+#'
+#' @keywords internal
+#' @export
+#' @noRd
 svm_objective_constrained <- function(theta, X, y, folds,
                                       max_support_fraction = 0.2,
                                       max_training_time = 0.01,

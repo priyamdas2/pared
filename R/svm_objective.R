@@ -1,3 +1,10 @@
+#' SVM objective function for README examples
+#'
+#' Internal/example helper exported for convenience.
+#'
+#' @keywords internal
+#' @export
+#' @noRd
 svm_objective <- function(theta, X, y, folds) {
   
   cost  <- 10^theta[1]
