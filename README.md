@@ -463,8 +463,6 @@ This example shows how `pared_ENet()` can be used to inspect multiple scientific
 
 ## Fused LASSO
 
-## 🔗 Fused LASSO
-
 This example illustrates Pareto-based tuning for Fused LASSO regression using `pared_FLasso()`. Fused LASSO is useful when the regression coefficients have a natural ordering and adjacent coefficients are expected to be similar. It uses two tuning parameters: `lambda1`, which controls sparsity through an L1 penalty on the coefficients, and `lambda2`, which controls smoothness through an L1 penalty on adjacent coefficient differences. Internally, `pared_FLasso()` searches over `log10(lambda1)` and `log10(lambda2)`.
 
 We first generate a simulated regression dataset with $n=100$ observations and $p=10$ predictors. The true coefficient vector has a piecewise-constant structure, with adjacent coefficients sharing similar values.
