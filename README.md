@@ -5,7 +5,7 @@ net, fused lasso, fused graphical lasso, and group graphical lasso. Provided R p
 
 ## Table of Contents
 - [Installation](#installation)
-- [Toy example](#toy-example)
+- [Basic Pareto Front Example](#toy-example)
 - [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
 - [Joint Graphical LASSO](#joint-graphical-lasso)
 - [Elastic-Net](#elastic-net)
@@ -13,6 +13,8 @@ net, fused lasso, fused graphical lasso, and group graphical lasso. Provided R p
 - [Case-study: Fitting JGL to cancer proteomics dataset](#case-study-fitting-jgl-to-cancer-proteomics-dataset)
 
 ## Installation
+
+## Basic Pareto Front Example
 
 ## General Pareto Front Example: SVM
 
