@@ -11,7 +11,7 @@
 
 ## Table of Contents
 - [Main functions](#main-functions)
-- [⚙️ Installation](#installation)
+- [Installation](#installation)
 - [Basic Pareto Front Example](#toy-example)
 - [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
 - [Joint Graphical LASSO](#joint-graphical-lasso)
@@ -68,7 +68,7 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 
 `plot_pared_3d()` creates an interactive three-dimensional Plotly scatter plot from a `pared_result` object. Users select three objective columns to display on the x-, y-, and z-axes. Optional projection lines can be drawn from each Pareto point to the xy-plane. This function is useful for visualizing three-objective Pareto fronts or three-dimensional projections of higher-dimensional Pareto results.
 
-## Installation
+## ⚙️Installation
 
 ## Basic Pareto Front Example
 
