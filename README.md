@@ -70,7 +70,7 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 
 ## ⚙️ Installation
 
-## 📈 Basic Pareto Front Example
+## Basic Pareto Front Example
 
 ## 🧪 General Pareto Front Example: SVM
 
