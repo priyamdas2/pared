@@ -70,14 +70,14 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 
 ## ⚙️ Installation
 
-## Basic Pareto Front Example
+## 📈 Basic Pareto Front Example
 
-## General Pareto Front Example: SVM
+## 🧪 General Pareto Front Example: SVM
 
-## Joint Graphical LASSO
+## 🕸️ Joint Graphical LASSO
 
-## Elastic-Net
+## 🧬 Elastic-Net
 
-## Fused LASSO
+## 🔗 Fused LASSO
 
-## Case-study: Fitting JGL to cancer proteomics dataset
+## 🎗️ Case-study: Fitting JGL to cancer proteomics dataset
