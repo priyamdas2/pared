@@ -81,12 +81,11 @@ devtools::install_github("priyamdas2/pared2026v1", force = TRUE)
 # load library
 library(pared2026v1)
 ```
-To access the package documentation, use:
+To view the package documentation and function-level help pages, use:
 
 ```r
 help(package = "pared2026v1")
 
-?generate_sample
 ?pared_ENet
 ?pared_FLasso
 ?pared_JGL
