@@ -83,7 +83,6 @@ library(pared2026v1)
 ```
 To access the package documentation, use:
 
-```markdown
 ```r
 help(package = "pared2026v1")
 
