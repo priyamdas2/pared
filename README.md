@@ -7,6 +7,7 @@
 > Das P, Robinson S, Peterson C (2026).  
 > *pared: Model selection using multi-objective optimization*.  
 > **ArXiv**: [https://arxiv.org/abs/2505.21730](https://arxiv.org/abs/2505.21730)
+
 ---
 
 ## Table of Contents
@@ -19,7 +20,7 @@
 - [Fused LASSO](#fused-lasso)
 - [Case-study: Fitting JGL to cancer proteomics dataset](#case-study-fitting-jgl-to-cancer-proteomics-dataset)
 
-
+---
 
 ## Main functions
 
