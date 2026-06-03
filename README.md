@@ -97,8 +97,6 @@ help(package = "pared2026v1")
 
 ## Basic Pareto Front Example
 
-## 📈 Basic Pareto Front Example
-
 The main function in `pared` is `pared_optimize()`. It is designed for situations where a user wants to tune one or more parameters, but the quality of a solution is measured using more than one criterion. Instead of combining all criteria into a single number, `pared_optimize()` searches for Pareto-optimal solutions, meaning solutions for which no objective can be improved without making at least one other objective worse.
 
 To use `pared_optimize()`, the user needs to provide an objective function. This objective function should take a numeric vector of tuning/search parameters as input and return a numeric vector containing multiple objective values. Each objective can be set to either `"min"` or `"max"` depending on whether smaller or larger values are preferred.
