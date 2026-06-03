@@ -101,17 +101,9 @@ The main function in `pared` is `pared_optimize()`. It is designed for situation
 
 To use `pared_optimize()`, the user needs to provide an objective function. This objective function should take a numeric vector of tuning/search parameters as input and return a numeric vector containing multiple objective values. Each objective can be set to either `"min"` or `"max"` depending on whether smaller or larger values are preferred.
 
-In this toy example, we optimize a three-dimensional vector
+In this toy example, we optimize a three-dimensional vector $z = (z_1,z_2,z_3)$, where each coordinate is constrained to lie between 1 and 2. Therefore, the search space is
 
-\[
-z = (z_1,z_2,z_3),
-\]
-
-where each coordinate is constrained to lie between 1 and 2. Therefore, the search space is
-
-\[
-1 \leq z_j \leq 2, \qquad j=1,2,3.
-\]
+$$1 \leq z_j \leq 2, \qquad j=1,2,3.$$
 
 We define three objectives:
 
