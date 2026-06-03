@@ -1,0 +1,24 @@
+Package: pared2026v1
+Type: Package
+Title: Pareto-Based Regularization and Multi-Objective Tuning
+Version: 0.1.0
+Author: Priyam Das
+Maintainer: Priyam Das <dasp4@vcu.edu>
+Description: Provides Pareto-based multi-objective tuning tools for regularized
+    statistical models, including elastic net, fused lasso, and joint graphical
+    lasso examples. The package also includes a general-purpose Pareto optimizer
+    for user-defined objective functions and visualization tools for two- and
+    three-dimensional Pareto fronts.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Imports:
+    GPareto,
+    plotly,
+    glmnet,
+    psych,
+    mvtnorm,
+    MASS
+
