@@ -367,7 +367,7 @@ set.seed(1)
 
 sample_data <- generate_sample(sample_sizes = c(30, 50, 40, 70), rand_seed = 1)
 ```
-#### Group JGL
+### Group JGL
 
 We first fit the group graphical LASSO version by setting `method = "group"`. In this case, `pared_JGL()` searches for Pareto-optimal tuning values that balance three objectives: total number of edges, number of shared edges, and AIC. The method-specific objective directions are handled internally: for group JGL, `pared_JGL()` minimizes total edges, maximizes shared edges, and minimizes AIC. Thus, the total number of edges measures graph complexity, the number of shared edges measures common network structure across groups, and AIC measures model fit adjusted for complexity.
 
@@ -391,7 +391,7 @@ jgl_group_res$figure
   <img src="images/plot_3_JGL_GGL.png" width="60%" />
 </p>
 
-#### Fused JGL
+### Fused JGL
 
 Next, we fit the fused graphical LASSO version by setting `method = "fused"`. This version encourages the estimated precision matrices to be similar across groups. For fused JGL, the method-specific objective directions are also handled internally: `pared_JGL()` minimizes total edges, minimizes the mean absolute deviation among estimated precision matrices, and minimizes AIC. These objectives summarize graph sparsity, similarity across group-specific networks, and model fit adjusted for complexity.
 
