@@ -4,6 +4,18 @@
 
 The package is built around six main user-facing functions.
 
+## Table of Contents
+- [Main functions](#main-functions)
+- [Installation](#installation)
+- [Basic Pareto Front Example](#toy-example)
+- [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
+- [Joint Graphical LASSO](#joint-graphical-lasso)
+- [Elastic-Net](#elastic-net)
+- [Fused LASSO](#fused-lasso)
+- [Case-study: Fitting JGL to cancer proteomics dataset](#case-study-fitting-jgl-to-cancer-proteomics-dataset)
+
+
+
 ## Main functions
 
 ### `pared_optimize()`
@@ -48,14 +60,6 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 ### `plot_pared_3d()`
 
 `plot_pared_3d()` creates an interactive three-dimensional Plotly scatter plot from a `pared_result` object. Users select three objective columns to display on the x-, y-, and z-axes. Optional projection lines can be drawn from each Pareto point to the xy-plane. This function is useful for visualizing three-objective Pareto fronts or three-dimensional projections of higher-dimensional Pareto results.
-## Table of Contents
-- [Installation](#installation)
-- [Basic Pareto Front Example](#toy-example)
-- [General Pareto Front Example: SVM](#general-pareto-front-example-svm)
-- [Joint Graphical LASSO](#joint-graphical-lasso)
-- [Elastic-Net](#elastic-net)
-- [Fused LASSO](#fused-lasso)
-- [Case-study: Fitting JGL to cancer proteomics dataset](#case-study-fitting-jgl-to-cancer-proteomics-dataset)
 
 ## Installation
 
