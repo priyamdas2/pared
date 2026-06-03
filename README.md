@@ -165,7 +165,7 @@ plot_pared_2d(toy_res,
 ```
 
 <p align="center">
-  <img src="images/plot_1_toy_pareto_2d" width="75%" />
+  <img src="images/plot_1_toy_pareto_2d.png" width="75%" />
 </p>
 
 
@@ -181,7 +181,7 @@ plot_pared_3d(toy_res,
 ```
 
 <p align="center">
-  <img src="images/plot_1_toy_pareto_3d" width="75%" />
+  <img src="images/plot_1_toy_pareto_3d.png" width="75%" />
 </p>
 
 This 3D plot shows the Pareto-optimal trade-offs among all three objectives. Points on the plot correspond to candidate vectors \(z\) that lie on the Pareto front. Hovering over a point displays the corresponding parameter values, allowing the user to inspect which choices of \(z_1,z_2,z_3\) produce each trade-off.
