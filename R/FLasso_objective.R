@@ -1,4 +1,10 @@
-
+#' Fused LASSO objective helper
+#'
+#' Exported for advanced users and internal use by pared_FLasso().
+#'
+#' @keywords internal
+#' @export
+#' @noRd
 FLasso_objective <- function(X, y, beta, log_lam1, log_lam2) {
   
   if (!is.matrix(X)) {
