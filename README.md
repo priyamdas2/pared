@@ -708,7 +708,7 @@ image_write(combined, path = "precision_heatmaps_combined.jpg", format = "jpg")
 ```
 </details> 
 
-![case_study_AIC_plot](images/precision_heatmaps_combined.png)
+![case_study_AIC_plot](images/precision_heatmaps_combined.jpg)
 
 - Then we explore the Pareto front of solutions using the `pared_JGL` function.
 
