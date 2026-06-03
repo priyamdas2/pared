@@ -71,7 +71,33 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 
 ---
 
-## ⚙️ Installation
+## Installation
+
+R package `pared` can be directly installed from GitHub as follows.
+
+```r
+# Install packages
+devtools::install_github("priyamdas2/pared2026v1", force = TRUE)
+# load library
+library(pared2026v1)
+```
+To access the package documentation, use:
+
+```markdown
+```r
+help(package = "pared2026v1")
+
+?generate_sample
+?pared_ENet
+?pared_FLasso
+?pared_JGL
+?pared_optimize
+?plot_pared_2d
+?plot_pared_3d
+```
+```
+
+---
 
 ## Basic Pareto Front Example
 
