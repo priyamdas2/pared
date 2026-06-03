@@ -21,7 +21,7 @@
 
 
 
-## Main functions
+## 🧩 Main functions
 
 The package is built around six main user-facing functions.
 
