@@ -164,6 +164,11 @@ plot_pared_2d(toy_res,
               plot_title = "Toy Pareto front")
 ```
 
+<p align="center">
+  <img src="images/plot_1_toy_pareto_2d" width="75%" />
+</p>
+
+
 The 2D plot is useful when the user wants to inspect a specific pair of objectives. However, since the full example contains three objectives, we can also visualize all three objectives simultaneously using `plot_pared_3d()`.
 
 ```r
@@ -174,6 +179,10 @@ plot_pared_3d(toy_res,
               plot_title = "Toy Pareto front",
               plot_marker_color = "blue")
 ```
+
+<p align="center">
+  <img src="images/plot_1_toy_pareto_3d" width="75%" />
+</p>
 
 This 3D plot shows the Pareto-optimal trade-offs among all three objectives. Points on the plot correspond to candidate vectors \(z\) that lie on the Pareto front. Hovering over a point displays the corresponding parameter values, allowing the user to inspect which choices of \(z_1,z_2,z_3\) produce each trade-off.
 
