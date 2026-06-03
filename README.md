@@ -304,6 +304,8 @@ fig3d_2
   <img src="images/plot_2_SVD_3d_unconstrained.png" width="60%" />
 </p>
 
+### SVM with objective-space constraints
+
 In some applications, the user may want to impose preference-based or objective-space restrictions. For example, very complex SVMs may be undesirable if they use too many support vectors, and very slow tuning choices may be undesirable in large datasets. The helper function `svm_objective_constrained()` illustrates one simple way to incorporate such restrictions directly into the objective function.
 
 The function first evaluates the usual four SVM objectives using `svm_objective()`: CV error, CV log-loss, support-vector fraction, and training time. It then checks whether the candidate tuning value violates either of two user-specified thresholds. If the average support-vector fraction is larger than `max_support_fraction`, or if the training time is larger than `max_training_time`, then the candidate is treated as undesirable. In that case, all four objective values are replaced by a large penalty value, `penalty_outside = 1e6` by default. Since all four objectives are minimized in this example, assigning a large penalty makes such candidates dominated or unattractive to the Pareto search.
