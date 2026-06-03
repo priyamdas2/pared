@@ -77,14 +77,14 @@ R package `pared` can be directly installed from GitHub as follows.
 
 ```r
 # Install packages
-pak::pak("priyamdas2/pared2026v1", force = TRUE)
+pak::pak("priyamdas2/pared", force = TRUE)
 # load library
-library(pared2026v1)
+library(pared)
 ```
 To view the package documentation and function-level help pages, use:
 
 ```r
-help(package = "pared2026v1")
+help(package = "pared")
 
 ?pared_ENet
 ?pared_FLasso
