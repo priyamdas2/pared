@@ -423,6 +423,43 @@ This example demonstrates how `pared_JGL()` can be used to tune graphical models
 
 ## Elastic-Net
 
+This example illustrates Pareto-based tuning for Elastic-Net regression using `pared_ENet()`. Elastic Net has two main tuning parameters: the mixing parameter `alpha` and the regularization parameter `lambda`. The parameter `alpha` controls the balance between ridge-type and lasso-type regularization, while `lambda` controls the overall amount of shrinkage. Internally, `pared_ENet()` searches over `alpha` and `log10(lambda)`.
+
+We first generate a simple simulated regression dataset with $n=100$ observations and $p=20$ predictors. The true coefficient vector is sparse: only the first three coefficients are nonzero.
+
+```r
+set.seed(1)
+
+n <- 100; p <- 20
+X <- matrix(rnorm(n * p), nrow = n)
+beta_true <- c(2, -1.5, 1, rep(0, p - 3))
+y <- as.numeric(X %*% beta_true + rnorm(n))
+```
+
+Next, we run Pareto-based Elastic-Net tuning. The function `pared_ENet()` evaluates candidate values of `alpha` and `lambda` using three objectives: number of nonzero coefficients, L2 norm of the fitted coefficient vector, and deviance. By default, all three objectives are minimized. Thus, the Pareto front summarizes trade-offs among sparsity, coefficient magnitude, and model fit.
+
+```r
+enet_res <- pared_ENet(X, y, Pareto_budget = 40)
+```
+
+The summary table contains the Pareto-optimal tuning values and their corresponding objective values. Each row represents a nondominated Elastic-Net solution, meaning that improving one objective would require worsening at least one other objective among the criteria used in the optimization.
+
+```r
+enet_res$summary_table
+```
+
+The returned object also contains an interactive 3D Pareto-front plot. Each point corresponds to a Pareto-optimal Elastic-Net fit, and hovering over a point displays the associated tuning-parameter values.
+
+```r
+enet_res$figure
+```
+
+This example shows how `pared_ENet()` can be used to inspect multiple scientifically relevant model-selection criteria simultaneously, rather than selecting a single model only by cross-validation error or deviance.
+
+
+
+---
+
 ## Fused LASSO
 
 ## Case-study: Fitting JGL to cancer proteomics dataset
