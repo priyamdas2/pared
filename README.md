@@ -107,9 +107,9 @@ $$1 \leq z_j \leq 2, \qquad j=1,2,3.$$
 
 We define three objectives:
 
-1. the arithmetic mean of \(z_1,z_2,z_3\), which we want to maximize;
-2. the harmonic mean of \(z_1,z_2,z_3\), which we want to minimize;
-3. the mean absolute deviation from 1.5, which we want to minimize.
+1. the arithmetic mean of $z_1,z_2,z_3$, which we want to **maximize**;
+2. the harmonic mean of $z_1,z_2,z_3$, which we want to **minimize**;
+3. the mean absolute deviation from 1.5, which we want to **minimize**.
 
 Although this example is not based on a statistical model, it illustrates the required input structure for `pared_optimize()`.
 
