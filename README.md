@@ -301,7 +301,7 @@ fig3d_2
 ```
 
 <p align="center">
-  <img src="images/plot_2_SVD_3d_unconstrained" width="60%" />
+  <img src="images/plot_2_SVD_3d_unconstrained.png" width="60%" />
 </p>
 
 In some applications, the user may want to impose preference-based or objective-space restrictions. For example, very complex SVMs may be undesirable if they use too many support vectors, and very slow tuning choices may be undesirable in large datasets. The helper function `svm_objective_constrained()` implements this idea by penalizing candidate solutions whose support-vector fraction or training time exceeds specified thresholds.
