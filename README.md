@@ -10,6 +10,17 @@
 
 ---
 
+## 📁 File Overview
+
+| Folder/File | Description |
+|-------------|-----------------------------|
+| `Simulation study/` | Simulation scripts for the Elastic Net and group graphical LASSO examples. |
+| `case study/` | Case-study files used in the manuscript and vignette, including computation-time comparisons across FGL, GGL, ENet, and FLasso. |
+| `pared_vignette.R` | Concise vignette code for the displayed examples, excluding the case study. |
+| `images/` | Final versions of key figures used in the manuscript and README. |
+
+---
+
 ## Table of Contents
 - [Main functions](#main-functions)
 - [Installation](#installation)
