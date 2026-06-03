@@ -418,7 +418,6 @@ jgl_fused_res$figure
 
 This example demonstrates how `pared_JGL()` can be used to tune graphical models when multiple objectives are relevant. Rather than selecting tuning parameters by a single criterion, the Pareto-front view allows the user to inspect a collection of scientifically meaningful trade-off solutions.
 
-
 ---
 
 ## Elastic-Net
@@ -454,12 +453,55 @@ The returned object also contains an interactive 3D Pareto-front plot. Each poin
 enet_res$figure
 ```
 
+<p align="center">
+  <img src="images/plot_4_ENet.png" width="60%" />
+</p>
+
 This example shows how `pared_ENet()` can be used to inspect multiple scientifically relevant model-selection criteria simultaneously, rather than selecting a single model only by cross-validation error or deviance.
-
-
 
 ---
 
 ## Fused LASSO
+
+## 🔗 Fused LASSO
+
+This example illustrates Pareto-based tuning for Fused LASSO regression using `pared_FLasso()`. Fused LASSO is useful when the regression coefficients have a natural ordering and adjacent coefficients are expected to be similar. It uses two tuning parameters: `lambda1`, which controls sparsity through an L1 penalty on the coefficients, and `lambda2`, which controls smoothness through an L1 penalty on adjacent coefficient differences. Internally, `pared_FLasso()` searches over `log10(lambda1)` and `log10(lambda2)`.
+
+We first generate a simulated regression dataset with $n=100$ observations and $p=10$ predictors. The true coefficient vector has a piecewise-constant structure, with adjacent coefficients sharing similar values.
+
+```r
+set.seed(123)
+
+n <- 100; p <- 10
+X <- matrix(rnorm(n * p), nrow = n)
+beta_true <- c(0, 0, 1, 1, 1, 0, 0, 0, 2, 2)
+y <- as.numeric(X %*% beta_true + rnorm(n))
+```
+
+Next, we run Pareto-based Fused LASSO tuning. The function `pared_FLasso()` evaluates candidate values of `lambda1` and `lambda2` using three objectives: number of nonzero coefficients, residual sum of squares, and coefficient roughness. By default, all three objectives are minimized. Thus, the Pareto front summarizes trade-offs among sparsity, model fit, and smoothness of the fitted coefficient vector.
+
+```r
+flasso_res <- pared_FLasso(X, y, Pareto_budget = 20)
+```
+
+The summary table contains the Pareto-optimal tuning values and their corresponding objective values. Each row represents a nondominated Fused LASSO solution, meaning that improving one objective would require worsening at least one other objective among the criteria used in the optimization.
+
+```r
+flasso_res$summary_table
+```
+
+The returned object also contains an interactive 3D Pareto-front plot. Each point corresponds to a Pareto-optimal Fused LASSO fit, and hovering over a point displays the associated tuning-parameter values.
+
+```r
+flasso_res$figure
+```
+
+<p align="center">
+  <img src="images/plot_5_FLasso.png" width="60%" />
+</p>
+
+This example shows how `pared_FLasso()` can be used to examine the trade-off between selecting a sparse model, achieving good fit, and preserving smoothness across adjacent regression coefficients.
+
+---
 
 ## Case-study: Fitting JGL to cancer proteomics dataset
