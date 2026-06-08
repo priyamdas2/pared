@@ -98,7 +98,7 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 R package `pared` can be directly installed from GitHub as follows.
 
 ```r
-# Install packages
+# Install packages (macOS/Linux users should review the instructions above before installation)
 pak::pak("priyamdas2/pared")
 # load library
 library(pared)
