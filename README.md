@@ -94,7 +94,7 @@ R package `pared` can be directly installed from GitHub as follows.
 
 ```r
 # Install packages
-pak::pak("priyamdas2/pared", force = TRUE)
+pak::pak("priyamdas2/pared")
 # load library
 library(pared)
 ```
