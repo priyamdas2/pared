@@ -90,6 +90,11 @@ For group graphical LASSO, the default objectives are total number of edges, sha
 
 ## Installation
 
+- **Windows users**: The `pared` vignette was compiled on a Windows platform and should run without installation issues.
+
+- **macOS or Linux users**: There may be a persistent issue related to loading the R package `rgl` or other `OpenGL`-related system components on macOS. The `pared` package imports `plotly`, whose 3D visualization functionality may rely indirectly on WebGL/OpenGL-related system components. Therefore, additional setup steps may be required to resolve installation or loading issues. See this [Stack Overflow Link](https://stackoverflow.com/questions/66011929/package-rgl-in-r-not-loading-in-mac-os/66127391#66127391) for more details.
+
+
 R package `pared` can be directly installed from GitHub as follows.
 
 ```r
